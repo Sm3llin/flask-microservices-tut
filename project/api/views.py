@@ -24,7 +24,7 @@ def add_user():
         'message': f'{email} was added!'
     }
 
-    return jsonify(response_object)
+    return jsonify(response_object), 201
 
 
 @users_blueprint.route('/ping', methods=['GET'])
