@@ -11,5 +11,5 @@ users_blueprint = Blueprint('users', __name__)
 def ping_pong():
     return jsonify({
         'status': 'success',
-        'messsage': 'pong!'
+        'message': 'pong!'
     })
