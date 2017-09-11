@@ -91,7 +91,7 @@ class TestUserService(BaseTestCase):
         db.session.add(user)
         db.session.commit()
         with self.client:
-            response = self.client.get(f'/users/{user_id}')
+            response = self.client.get(f'/users/{user.id}')
             data= json.loads(response.data.decode())
             self.assertEqual(response.status_code, 200)
             self.assertTrue('created_at' in data['data'])
