@@ -26,7 +26,7 @@ class TestUserService(BaseTestCase):
         self.assertIn('pong!', data['message'])
         self.assertIn('success', data['status'])
 
-    # No Users GET
+    # main (index.html) GET
     def test_main_no_users(self):
         """Ensure the main route behaves correctly when no users have been added to the database."""
         response = self.client.get('/')
@@ -44,6 +44,19 @@ class TestUserService(BaseTestCase):
         self.assertNotIn(b'<p>No users!</p>', response.data)
         self.assertIn(b'<strong>michael</strong>', response.data)
         self.assertIn(b'<strong>michaelellin</strong>', response.data)
+
+    def test_main_add_user(self):
+        """Ensure a new user can be added to the database."""
+        with self.client:
+            response = self.client.post(
+                '/',
+                data=dict(username='michael', email='michael@ellin.com'),
+                follow_redirects=True
+            )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'<h1>All Users</h1>', response.data)
+            self.assertNotIn(b'<p>No users!</p>', response.data)
+            self.assertIn(b'<strong>michael</strong>', response.data)
 
     # Users POST
     def test_add_user(self):
