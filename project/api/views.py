@@ -48,6 +48,21 @@ def add_user():
         return jsonify(response_object), 400
 
 
+@users_blueprint.route('/users/<user_id>', methods=['GET'])
+def get_single_user(user_id):
+    """Get single user details"""
+    user = User.query.filter_by(id=user_id).first()
+    response_object = {
+        'status': 'success',
+        'data': {
+            'username': user.username,
+            'email': user.email,
+            'created_at': user.created_at
+        }
+    }
+    return jsonify(response_object), 200
+
+
 @users_blueprint.route('/ping', methods=['GET'])
 def ping_pong():
     return jsonify({
