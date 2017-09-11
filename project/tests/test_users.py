@@ -56,7 +56,7 @@ class TestUserService(BaseTestCase):
             )
             data = json.loads(response.data.decode())
             self.assertEqual(response.status_code, 400)
-            self.assertIn('Invalid parload.', data['message'])
+            self.assertIn('Invalid payload.', data['message'])
             self.assertIn('fail', data['status'])
 
     def test_add_user_duplicate_user(self):

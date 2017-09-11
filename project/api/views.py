@@ -47,13 +47,6 @@ def add_user():
         }
         return jsonify(response_object), 400
 
-    response_object = {
-        'status': 'success',
-        'message': f'{email} was added!'
-    }
-
-    return jsonify(response_object), 201
-
 
 @users_blueprint.route('/ping', methods=['GET'])
 def ping_pong():
