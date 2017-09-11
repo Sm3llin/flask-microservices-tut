@@ -5,6 +5,7 @@ import unittest
 from flask_script import Manager
 
 from project import create_app, db
+from project.api.views import User
 
 
 app = create_app()
@@ -27,6 +28,14 @@ def recreate_db():
     """Recreates a database."""
     db.drop_all()
     db.create_all()
+    db.session.commit()
+
+
+@manager.command
+def seed_db():
+    """Seeds the database"""
+    db.session.add(User(username='michael', email='michael@ellin.com'))
+    db.session.add(User(username='michaelellin', email='michaelellin@ellin.com'))
     db.session.commit()
 
 
